@@ -6,7 +6,7 @@ import {
   MetaReducer
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
-import { InitAppState, initAppReducer } from '../init/init-app.reducer';
+import { InitAppState, initAppReducer } from '../state/init/init-app.reducer';
 
 export interface State {
   init: InitAppState;

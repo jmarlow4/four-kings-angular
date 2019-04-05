@@ -7,9 +7,9 @@ import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './init/app.effects';
-import { AppInitService, initAppFactory } from './init/app-init.service';
-import { HttpClientModule } from '@angular/common/http';
+import { AppEffects } from './state/init/app.effects';
+import { initAppFactory } from './state/init/init-app.factory';
+import { ServicesModule } from './services/services.module';
 
 @NgModule({
   declarations: [
@@ -17,13 +17,12 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    ServicesModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects])
   ],
   providers: [
-    AppInitService,
     {
       provide: APP_INITIALIZER,
       useFactory: initAppFactory,

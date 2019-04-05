@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { AppInitService } from './app-init.service';
 import { InitAppActionTypes, InitComplete } from './init-app.actions';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { InitAppState } from './init-app.reducer';
 import { Store } from '@ngrx/store';
+import { DeckService } from '../../services/deck.service';
 
 export interface DeckApiResponse {
   remaining: number;
@@ -20,7 +20,7 @@ export class AppEffects {
   initApp$ = this.actions$
     .pipe(
       ofType(InitAppActionTypes.Initialize),
-      mergeMap(() => this.appInitService.initializeApp()
+      mergeMap(() => this.deckService.initDeck()
         .pipe(
           map((res: DeckApiResponse) => new InitComplete(res.deck_id),
           catchError((err) => err)
@@ -31,7 +31,7 @@ export class AppEffects {
 
   constructor(
     private actions$: Actions,
-    private appInitService: AppInitService,
+    private deckService: DeckService,
     private store: Store<InitAppState>
   ) {}
 
