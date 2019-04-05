@@ -9,7 +9,7 @@ export const initialState: DrawCardState = {
   allCards: []
 };
 
-export function DrawCardReducer(
+export function drawCardReducer(
   state = initialState,
   action: DrawCardActions
 ): DrawCardState {

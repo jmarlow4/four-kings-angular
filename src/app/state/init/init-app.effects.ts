@@ -2,19 +2,11 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { InitAppActionTypes, InitComplete } from './init-app.actions';
 import { mergeMap, map, catchError } from 'rxjs/operators';
-import { InitAppState } from './init-app.reducer';
-import { Store } from '@ngrx/store';
 import { DeckService } from '../../services/deck.service';
-
-export interface DeckApiResponse {
-  remaining: number;
-  cards: string[];
-  deck_id: string;
-  success: boolean;
-}
+import { DeckApiResponse } from 'src/app/models/deck-api-response.interface';
 
 @Injectable()
-export class AppEffects {
+export class InitAppEffects {
 
   @Effect()
   initApp$ = this.actions$
@@ -31,8 +23,7 @@ export class AppEffects {
 
   constructor(
     private actions$: Actions,
-    private deckService: DeckService,
-    private store: Store<InitAppState>
+    private deckService: DeckService
   ) {}
 
 }

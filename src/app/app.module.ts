@@ -7,20 +7,30 @@ import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './state/init/app.effects';
+import { InitAppEffects } from './state/init/init-app.effects';
 import { initAppFactory } from './state/init/init-app.factory';
 import { ServicesModule } from './services/services.module';
+import { DrawCardEffects } from './state/draw-card/draw-card.effect';
+import { ColumnsContainerComponent } from './components/columns-container/columns-container.component';
+import { CardColumnComponent } from './components/card-column/card-column.component';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ColumnsContainerComponent,
+    CardColumnComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
     ServicesModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([
+      InitAppEffects,
+      DrawCardEffects
+    ])
   ],
   providers: [
     {
