@@ -2,7 +2,7 @@ import { DrawCardActions, DrawCardActionTypes } from './draw-card.actions';
 
 
 export interface DrawCardState {
-  allCards: any[]
+  allCards: any[];
 }
 
 export const initialState: DrawCardState = {
